@@ -1,0 +1,716 @@
+/* ==========================================
+   VOYA TRAVEL — DASHBOARD
+   ========================================== */
+
+/* 1. RESET E VARIÁVEIS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sidebar-bg: #303436;
+    --sidebar-hover: #3b4144;
+    --sidebar-active: #159fe0;
+    --page-bg: #f5f8fa;
+    --card-bg: #ffffff;
+    --text-primary: #202a33;
+    --text-secondary: #748392;
+    --border-color: #e4e9ed;
+    --blue: #087ba5;
+    --blue-hover: #06658a;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body.dashboard-layout {
+    min-height: 100vh;
+    background: var(--page-bg);
+    color: var(--text-primary);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 13px;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 2. MENU LATERAL */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+
+    width: 216px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 0 13px 19px;
+    overflow-y: auto;
+
+    background: var(--sidebar-bg);
+    color: #c4cdd3;
+}
+
+/* 3. CABEÇALHO DA SIDEBAR */
+
+.sidebar-header {
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 -13px 13px;
+    padding: 0 19px;
+}
+
+.sidebar-logo {
+    display: block;
+    width: 120px;
+    max-width: 120px;
+    max-height: 34px;
+    object-fit: contain;
+    object-position: left center;
+    font-size: 11px;
+    color: #dce5ea;
+}
+
+.sidebar-brand-title {
+    flex-shrink: 0;
+    color: #f5f7f8;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* 4. NAVEGAÇÃO */
+
+.sidebar-nav-container {
+    width: 100%;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    list-style: none;
+}
+
+.nav-link {
+    min-height: 37px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 12px;
+    border-radius: 9px;
+
+    color: #c4cdd3;
+    font-size: 11px;
+    font-weight: 500;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.nav-link .material-symbols-outlined {
+    flex-shrink: 0;
+    font-size: 17px;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background: var(--sidebar-hover);
+}
+
+.nav-link.active {
+    color: #ffffff;
+    background: var(--sidebar-active);
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 145, 210, 0.15);
+}
+
+.nav-link.active:hover {
+    background: #0d94d2;
+}
+
+/* 5. RODAPÉ DO MENU */
+
+.sidebar-footer {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 13px;
+    border-top: 1px solid #454a4d;
+}
+
+.user-badge {
+    min-height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    background: #3b3f42;
+}
+
+.user-info {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e3e8eb;
+}
+
+.user-info > div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.user-name {
+    overflow: hidden;
+    color: #f4f6f7;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.user-status {
+    color: #31b8ed;
+    font-size: 9px;
+}
+
+.btn-icon-logout {
+    width: 25px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #c4d0d7;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-icon-logout .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.btn-icon-logout:hover {
+    background: #50575b;
+    color: #ffffff;
+}
+
+/* 6. ÁREA PRINCIPAL */
+
+.main-wrapper {
+    min-height: 100vh;
+    margin-left: 216px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 7. BARRA SUPERIOR */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+
+    height: 51px;
+    min-height: 51px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 0 27px;
+    background: #f8fafb;
+    border-bottom: 1px solid #e6ebef;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.icon-btn {
+    position: relative;
+    width: 26px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #71808d;
+
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.icon-btn .material-symbols-outlined {
+    font-size: 19px;
+}
+
+.icon-btn:hover {
+    background: #e9f4fa;
+    color: var(--blue);
+}
+
+.notification-dot {
+    position: absolute;
+    top: 5px;
+    right: 3px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    background: #16a5e4;
+}
+
+/* 8. CONTEÚDO */
+
+.content-area {
+    flex: 1;
+    padding: 34px 32px 30px;
+}
+
+.content-header {
+    margin-bottom: 25px;
+}
+
+.content-title {
+    margin-bottom: 6px;
+    color: #222c35;
+    font-size: 23px;
+    line-height: 1.4;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.content-subtitle {
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* 9. GRADE DE CARTÕES */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 19px;
+}
+
+/* 10. CARTÕES DE VIAGEM */
+
+.travel-card {
+    min-width: 0;
+    min-height: 282px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 19px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    box-shadow: 0 1px 3px rgba(25, 48, 63, 0.06);
+
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.travel-card:hover {
+    box-shadow: 0 6px 18px rgba(25, 48, 63, 0.08);
+    transform: translateY(-2px);
+}
+
+.card-content-top {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* 11. CABEÇALHO DOS CARTÕES */
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 21px;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-success {
+    color: #07845f;
+    background: #e9fbf3;
+}
+
+.badge-info {
+    color: #0874c1;
+    background: #edf6ff;
+}
+
+.badge-warning {
+    color: #bc650c;
+    background: #fff8e7;
+}
+
+.card-category {
+    color: #617080;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+/* 12. TÍTULOS DOS CARTÕES */
+
+.card-headline {
+    min-width: 0;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    margin-bottom: 4px;
+    color: #222b34;
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    overflow-wrap: anywhere;
+}
+
+.card-subtitle {
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* 13. CAIXA DE DETALHES */
+
+.card-details-box {
+    min-height: 57px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    padding: 10px 13px;
+    border-radius: 7px;
+    background: #f0f3f6;
+}
+
+.detail-label {
+    color: #78899a;
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.detail-value {
+    color: #25313c;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* 14. INFORMAÇÕES INFERIORES */
+
+.card-footer-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.card-footer-label {
+    color: var(--text-secondary);
+    font-size: 10px;
+}
+
+.card-footer-value {
+    color: #202a33;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* 15. BOTÕES DOS CARTÕES */
+
+.card-footer {
+    margin-top: auto;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    border: none;
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.btn .material-symbols-outlined {
+    font-size: 17px;
+}
+
+.btn-full {
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 10px;
+}
+
+.btn-primary {
+    background: #08749a;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #065f80;
+}
+
+.btn-secondary {
+    background: #e9ecef;
+    color: #263642;
+}
+
+.btn-secondary:hover {
+    background: #dce7ed;
+    color: #086c96;
+}
+
+/* 16. FOCO DE TECLADO */
+
+.nav-link:focus-visible,
+.btn:focus-visible,
+.icon-btn:focus-visible,
+.btn-icon-logout:focus-visible {
+    outline: 2px solid #40b9ef;
+    outline-offset: 3px;
+}
+
+/* 17. TELAS MÉDIAS */
+
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-wrapper {
+        margin-left: 200px;
+    }
+
+    .content-area {
+        padding: 28px 22px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .travel-card:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* 18. TABLETS E CELULARES */
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 66px;
+        padding: 0 8px 12px;
+        align-items: center;
+    }
+
+    .sidebar-header {
+        justify-content: center;
+        margin: 0 -8px 16px;
+        padding: 0;
+    }
+
+    .sidebar-logo,
+    .sidebar-brand-title,
+    .nav-link > span:not(.material-symbols-outlined),
+    .user-info > div,
+    .btn-icon-logout {
+        display: none;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 0;
+        min-height: 42px;
+    }
+
+    .nav-link .material-symbols-outlined {
+        font-size: 20px;
+    }
+
+    .sidebar-footer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .user-badge {
+        padding: 6px;
+        background: transparent;
+    }
+
+    .user-info {
+        justify-content: center;
+    }
+
+    .main-wrapper {
+        margin-left: 66px;
+    }
+
+    .topbar {
+        padding: 0 17px;
+    }
+
+    .content-area {
+        padding: 25px 17px;
+    }
+
+    .content-title {
+        font-size: 21px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .travel-card:last-child {
+        grid-column: auto;
+    }
+}
+
+/* 19. CELULARES ESTREITOS */
+
+@media (max-width: 420px) {
+    .content-area {
+        padding: 21px 12px;
+    }
+
+    .content-title {
+        font-size: 19px;
+    }
+
+    .content-subtitle {
+        font-size: 10px;
+    }
+
+    .travel-card {
+        padding: 16px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    .card-footer-value {
+        font-size: 12px;
+    }
+}
+
+/* 20. ACESSIBILIDADE: MENOS MOVIMENTO */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .travel-card:hover {
+        transform: none;
+    }
+}

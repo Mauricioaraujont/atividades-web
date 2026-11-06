@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "IOT_14-main",
+			"path": "../../IOT/IOT_14-main"
+		},
+		{
+			"path": "../../ATVD IA/previsao-streaming"
+		},
+		{
+			"path": "../../FibroSync/codigo"
+		}
+	],
+	"settings": {}
+}
